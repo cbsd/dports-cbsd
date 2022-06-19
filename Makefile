@@ -1,5 +1,5 @@
 PORTNAME=	cbsd
-DISTVERSION=	13.0.13
+DISTVERSION=	13.1.0
 CATEGORIES=	sysutils
 
 MAINTAINER=	olevole@olevole.ru
@@ -10,11 +10,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libsqlite3.so:databases/sqlite3 \
 		libssh2.so:security/libssh2 \
-                libelf.so:devel/libelf
+		libelf.so:devel/libelf
 RUN_DEPENDS=	${LOCALBASE}/share/certs/ca-root-nss.crt:security/ca_root_nss \
 		rsync:net/rsync \
 		sqlite3:databases/sqlite3 \
-		sudo:security/sudo
+		sudo:security/sudo \
+		sysrc:sysutils/sysrc
 
 USES=		compiler:c++11-lang libedit pkgconfig:both
 USE_GITHUB=	yes
