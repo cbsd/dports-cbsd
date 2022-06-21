@@ -1,5 +1,5 @@
 PORTNAME=	cbsd
-DISTVERSION=	13.1.0
+DISTVERSION=	13.1.1
 CATEGORIES=	sysutils
 
 MAINTAINER=	olevole@olevole.ru
@@ -9,13 +9,11 @@ LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libsqlite3.so:databases/sqlite3 \
-		libssh2.so:security/libssh2 \
-		libelf.so:devel/libelf
+		libssh2.so:security/libssh2
 RUN_DEPENDS=	${LOCALBASE}/share/certs/ca-root-nss.crt:security/ca_root_nss \
 		rsync:net/rsync \
 		sqlite3:databases/sqlite3 \
-		sudo:security/sudo \
-		sysrc:sysutils/sysrc
+		sudo:security/sudo
 
 USES=		compiler:c++11-lang libedit pkgconfig:both
 USE_GITHUB=	yes
@@ -31,6 +29,12 @@ GROUPS=		${PORTNAME}
 CBSD_HOME?=	${PREFIX}/cbsd
 
 .include <bsd.port.options.mk>
+
+.if ${ARCH} == amd64 || ${ARCH} == i386
+PLIST_SUB=	X86=""
+.else
+PLIST_SUB=	X86="@comment "
+.endif
 
 do-install:
 	@${ECHO} "Installing in ${CBSD_HOME}"
